@@ -1,0 +1,26 @@
+.container {
+  padding: 1.2rem;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 2rem;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.navBarOptionContainer p {
+  font-size: 1rem;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 5px 10px;
+  background: linear-gradient(135deg, #ffd700, #b8860b);
+  border-radius: 30px;
+}
+.navBarOptionContainer .profile {
+  display: flex;
+  gap: 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}

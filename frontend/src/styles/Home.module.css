@@ -1,0 +1,61 @@
+.container {
+  font-family: "poppins";
+  padding: 1.2rem;
+}
+.mainContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  padding-inline: 2rem;
+  height: 80vh;
+}
+.mainContainer_left {
+  flex: 0.5;
+}
+.mainContainer_left > p:nth-child(1) {
+  background: linear-gradient(
+    90deg,
+    #f5f5f5,
+    /* light pearl white */ #dcdcdc,
+    /* soft silver */ #a9a9a9,
+    /* dim grey */ #f5f5f5
+  );
+}
+
+.mainContainer_left > p:nth-child(2) {
+  color: #4d4d4d;
+  font-size: 60px;
+  font-weight: bold;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(
+    90deg,
+    #d4af37,
+    #c0c0c0
+  ); /* Gold to Silver/Grey */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+
+  font-size: 1.7rem;
+}
+.mainContainer_left > div.buttonJoin {
+  margin-top: 1.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
+  background: linear-gradient(135deg, #ffd700, #b8860b);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.mainContainer_right img {
+  width: 300px;
+  height: 300px;
+}
