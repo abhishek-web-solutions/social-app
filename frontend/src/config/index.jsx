@@ -1,6 +1,6 @@
 import axios from "axios";
 
 const clientserver = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://social-app-j6oo.onrender.com/",
 });
 export { clientserver as clientServer };
