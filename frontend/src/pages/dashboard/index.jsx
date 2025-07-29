@@ -55,7 +55,7 @@ export default function index() {
                   <img
                     width={200}
                     className={styles.profileImg}
-                    src={`http://localhost:5000/uploads/${authState.user.userId.profilePicture}`}
+                    src={`https://social-app-j6oo.onrender.com/uploads/${authState.user.userId.profilePicture}`}
                     alt=""
                   />
                 </div>
@@ -105,7 +105,7 @@ export default function index() {
                     <div className={styles.singleCard_profileContainer}>
                       <img
                         className={styles.profileImg}
-                        src={`http://localhost:5000/uploads/${authState.user.userId.profilePicture}`}
+                        src={`https://social-app-j6oo.onrender.com/uploads/${authState.user.userId.profilePicture}`}
                         alt=""
                       />
                       <div>
@@ -158,7 +158,7 @@ export default function index() {
                     <div className={styles.singleCard_image}>
                       <p>{post.body}</p>
                       <img
-                        src={`http://localhost:5000/uploads/${post.media}`}
+                        src={`https://social-app-j6oo.onrender.com/uploads/${post.media}`}
                         alt=""
                       />
                     </div>

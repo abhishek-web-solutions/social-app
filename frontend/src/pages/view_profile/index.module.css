@@ -20,3 +20,37 @@
   left: 8%;
   text-align: center;
 }
+.profileContainer_details {
+  padding-top: 6.6rem;
+}
+.card {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+}
+.card_profileContainer {
+  display: flex;
+}
+.card_profileContainer > img {
+  width: 3.4rem;
+  height: auto;
+  object-fit: cover;
+}
+.connectionBtn {
+  padding-inline: 0.8rem;
+  padding-block: 0.3rem;
+  background: rgb(3, 93, 183, 0.905);
+  outline: none;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.connectedButton {
+  padding-inline: 0.8rem;
+  padding-block: 0.3rem;
+  border: 1px solid blue;
+  outline: none;
+  border-radius: 10px;
+  cursor: pointer;
+}

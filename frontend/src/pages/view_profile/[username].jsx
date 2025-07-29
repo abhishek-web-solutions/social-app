@@ -3,9 +3,43 @@ import DashboardLayout from "@/layout/DashBoardLayout";
 import UserLayout from "@/layout/UserLayout";
 import styles from "./index.module.css";
 import { useSearchParams } from "next/navigation";
-import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import React, { use, useEffect } from "react";
+import { useRouter } from "next/router";
+import { getAllPosts } from "@/config/redux/action/postAction";
 
 export default function ViewProfilePage({ userProfile }) {
+  const router = useRouter();
+  const postReducer = useSelector((state) => state.postReducer);
+  const dispatch = useDispatch();
+  const authState = useSelector((state) => state.auth);
+  const [userPosts, setUserPosts] = useState([]);
+  const [isCurrentUserInConnection, setIsCurrentUserInConnection] =
+    useState(false);
+  const getUsersPost = async () => {
+    await dispatch(getAllPosts());
+    // await dispatch(
+    //   getConnectionsRequest({ token: localStorage.getItem("token") })
+    // );
+  };
+  useEffect(() => {
+    let post = postReducer.posts.filter((post) => {
+      return post.userId.username === router.query.username;
+    });
+    setUserPosts(post);
+  }, [postReducer.post]);
+  useEffect(() => {
+    if (
+      authState.connections.some(
+        (user) => user.connectionId._id === userProfile.userId._id
+      )
+    )
+      setIsCurrentUserInConnection(true);
+  }, [authState.connections]);
+  useEffect(() => {
+    getUsersPost();
+  }, []);
   const searchParams = useSearchParams();
   useEffect(() => {
     console.log("View Profile Page Loaded");
@@ -23,8 +57,63 @@ export default function ViewProfilePage({ userProfile }) {
           </div>
           <div className={styles.profileContainer_details}>
             <div style={{ display: "flex", gap: "0.7rem" }}>
-              <div style={{ flex: "0.8" }}></div>
-              <div style={{ flex: "0.2" }}></div>
+              <div style={{ flex: "0.8" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    width: "fit_content",
+                    alignItems: "center",
+                  }}
+                >
+                  <h2>{userProfile.userId.name}</h2>
+                  <p style={{ color: "grey" }}>
+                    @{userProfile.userId.username}
+                  </p>
+                </div>
+                {isCurrentUserInConnection ? (
+                  <button className={styles.connectedButton}>connected</button>
+                ) : (
+                  <button
+                    className={styles.connectionBtn}
+                    onClick={() => {
+                      dispatch(
+                        sendConnectionRequest({
+                          token: localStorage.getItem("token"),
+                          userId: userProfile.userId._id,
+                        })
+                      );
+                    }}
+                  >
+                    connect
+                  </button>
+                )}
+                <div>
+                  <p>{userProfile.bio}</p>
+                </div>
+              </div>
+              <div style={{ flex: "0.2" }}>
+                <h3>recent </h3>
+                {userPosts.map((post) => {
+                  return (
+                    <div key={post._id} className={styles.postCard}>
+                      <div className={styles.card}>
+                        <div className={styles.card_profileContainer}>
+                          {post.media !== "" ? (
+                            <img
+                              src={`https://social-app-j6oo.onrender.com/uploads/${post.media}`}
+                              alt=""
+                            />
+                          ) : (
+                            <div style={{ width: "3.4rem", height: "3.4rem" }}>
+                              {post.body}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>

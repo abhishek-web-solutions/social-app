@@ -100,18 +100,16 @@ export default function DashboardLayout({ children }) {
               authState.all_users.map((profile) => {
                 return (
                   <div className={styles.suggestUser}>
-                    <img
+                    {/* <img
                       className={styles.userImg}
                       src={`http://localhost:5000/uploads/${profile.userId.profilePicture}`}
                       alt=""
-                    />
+                    /> */}
                     <div className="userDetail">
                       <p style={{ fontWeight: "bold" }}>
                         {profile.userId.name}
                       </p>
                       <p>@{profile.userId.username}</p>
-
-                      <button>follow</button>
                     </div>
                   </div>
                 );
