@@ -33,7 +33,7 @@ export default function DiscoverPage() {
                   className={styles.userProfile}
                 >
                   <img
-                    src={`http://localhost:5000/uploads/${user.userId.profilePicture}`}
+                    src={`https://social-app-j6oo.onrender.com/uploads/${user.userId.profilePicture}`}
                     alt={`${user.name}'s profile`}
                   />
                   <div>

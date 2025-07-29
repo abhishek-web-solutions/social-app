@@ -266,7 +266,7 @@ export default function index() {
                         <div className="singleComment" key={postComment._id}>
                           <div className="singleComment_profileContainer">
                             <img
-                              src={`http://localhost:5000/uploads/${postComment.userId.profilePicture}`}
+                              src={`https://social-app-j6oo.onrender.com/uploads/${postComment.userId.profilePicture}`}
                               alt=""
                             />
 

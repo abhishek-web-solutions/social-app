@@ -51,7 +51,7 @@ export default function ViewProfilePage({ userProfile }) {
         <div className={styles.container}>
           <div className={styles.backDropContainer}>
             <img
-              src={`http://localhost:5000/uploads/${userProfile.userId.profilePicture}`}
+              src={`https://social-app-j6oo.onrender.com/uploads/${userProfile.userId.profilePicture}`}
               alt=""
             />
           </div>
