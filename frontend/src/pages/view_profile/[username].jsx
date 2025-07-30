@@ -3,6 +3,11 @@ import DashboardLayout from "@/layout/DashBoardLayout";
 import UserLayout from "@/layout/UserLayout";
 import styles from "./index.module.css";
 import { useSearchParams } from "next/navigation";
+import {
+  getConnectionsRequest,
+  sendConnectionRequest,
+} from "@/config/redux/action/authAction";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import React, { use, useEffect } from "react";
@@ -17,25 +22,37 @@ export default function ViewProfilePage({ userProfile }) {
   const [userPosts, setUserPosts] = useState([]);
   const [isCurrentUserInConnection, setIsCurrentUserInConnection] =
     useState(false);
+  const [isConnectionNull, setIsConnectionNull] = useState(true);
   const getUsersPost = async () => {
     await dispatch(getAllPosts());
-    // await dispatch(
-    //   getConnectionsRequest({ token: localStorage.getItem("token") })
-    // );
+    await dispatch(
+      getConnectionsRequest({
+        token: localStorage.getItem("token"),
+      })
+    );
   };
   useEffect(() => {
     let post = postReducer.posts.filter((post) => {
       return post.userId.username === router.query.username;
     });
     setUserPosts(post);
-  }, [postReducer.post]);
+  }, [postReducer.posts]);
   useEffect(() => {
     if (
       authState.connections.some(
         (user) => user.connectionId._id === userProfile.userId._id
       )
-    )
+    ) {
       setIsCurrentUserInConnection(true);
+      if (
+        authState.connections.find(
+          (user) => user.connectionId._id === userProfile.userId._id
+        ).status_accepted ===
+        true
+      ) {
+        setIsConnectionNull(false);
+      }
+    }
   }, [authState.connections]);
   useEffect(() => {
     getUsersPost();
@@ -71,7 +88,9 @@ export default function ViewProfilePage({ userProfile }) {
                   </p>
                 </div>
                 {isCurrentUserInConnection ? (
-                  <button className={styles.connectedButton}>connected</button>
+                  <button className={styles.connectedButton}>
+                    {isConnectionNull ? "pending" : "connected"}
+                  </button>
                 ) : (
                   <button
                     className={styles.connectionBtn}

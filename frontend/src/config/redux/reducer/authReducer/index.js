@@ -4,6 +4,8 @@ import {
   getAllUsers,
   registerUser,
   loginUser,
+  getConnectionsRequest,
+  getMyConnectionRequests,
 } from "../../action/authAction";
 
 const initialState = {
@@ -69,9 +71,7 @@ const authSlice = createSlice({
         state.message = "Registration successfull";
       })
       .addCase(registerUser.rejected, (state, action) => {
-        console.log(state);
-        console.log(action);
-        console.log("reject");
+        
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
@@ -88,6 +88,19 @@ const authSlice = createSlice({
         state.isError = false;
         state.all_profiles_fetched = true;
         state.all_users = action.payload.profiles;
+      })
+      .addCase(getConnectionsRequest.fulfilled, (state, action) => {
+        state.connections = action.payload;
+      })
+
+      .addCase(getConnectionsRequest.rejected, (state, action) => {
+        state.message = action.payload;
+      })
+      .addCase(getMyConnectionRequests.fulfilled, (state, action) => {
+        state.connectionRequests = action.payload;
+      })
+      .addCase(getMyConnectionRequests.rejected, (state, action) => {
+        state.message = action.payload;
       });
   },
 });

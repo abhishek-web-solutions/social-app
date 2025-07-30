@@ -28,7 +28,7 @@ export const createPost = async (req, res) => {
     await post.save();
     return res.status(200).json({ message: "Post created successfully", post });
   } catch (error) {
-    console.error("Error creating post:", error);
+  
     res.status(500).json({ message: error.message });
   }
 };
@@ -38,7 +38,7 @@ export const getAllposts = async (req, res) => {
       "userId",
       "name email username profilePicture"
     );
-    console.log("Posts fetched:", posts);
+   
     res.json(posts);
   } catch (error) {
     console.error("Error fetching all posts:", error);
@@ -87,12 +87,11 @@ export const increment_likes = async (req, res) => {
 };
 export const commentPost = async (req, res) => {
   const { token, post_id, commentBody } = req.body;
-  console.log(token);
-  console.log(req.query);
+
 
   try {
     const user = await User.findOne({ token: token }).select("_id");
-    console.log(user);
+   
     if (!user) {
       return res.status(400).json({ message: "User not found" });
     }
@@ -126,7 +125,7 @@ export const get_Comments_by_post = async (req, res) => {
       "userId",
       "username name"
     );
-    console.log("get allcomments");
+   
     return res.json(comments.reverse());
   } catch (error) {
     console.error("Error fetching comments by post:", error);

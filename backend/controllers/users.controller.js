@@ -1,9 +1,11 @@
 import User from "../models/users.model.js";
 import Profile from "../models/profiles.model.js";
+import ConnectionRequest from "../models/connections.model.js";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
 import PDFDocument from "pdfkit";
 import fs from "fs";
+import { connections } from "mongoose";
 const converToUserDataTOPDF = async (userProfile) => {
   const doc = new PDFDocument();
   const outputpath = crypto.randomBytes(32).toString("hex") + ".pdf";
@@ -86,7 +88,7 @@ export const login = async (req, res) => {
 // Update profile picture function
 export const uploadProfilePicture = async (req, res) => {
   const { token } = req.body;
-  console.log(token);
+ 
   try {
     const user = await User.findOne({ token: token });
     if (!user) {
@@ -131,11 +133,7 @@ export const updateUserProfile = async (req, res) => {
 };
 export const getUserAndProfile = async (req, res) => {
   try {
-    console.log(req);
-    console.log(req.body);
-    console.log("req.body:", req.body);
-    console.log("req.query:", req.query);
-    console.log("req.headers:", req.headers);
+    
 
     const { token } = req.query;
     console.log("Token received:", token);
@@ -177,7 +175,7 @@ export const updateProfileData = async (req, res) => {
 };
 
 export const getAllUserProfile = async (req, res) => {
-  console.log("inside user routes");
+ 
   try {
     const profiles = await Profile.find().populate(
       "userId",
@@ -200,17 +198,21 @@ export const downloadProfile = async (req, res) => {
   return res.json(a);
 };
 export const sendConnectionRequest = async (req, res) => {
-  const { token, connectionID } = req.body;
+ 
+  const { token, connectionId } = req.body;
+
   try {
-    const user = await User.findOne({ token: token });
+    const user = await User.findOne({ token });
+
     if (!user) {
       return res.status(400).json({ message: "User not found" });
     }
-    const connectionUser = await User.findOne({ _id: connectionID });
+
+    const connectionUser = await User.findOne({ _id: connectionId });
     if (!connectionUser) {
       return res.status(400).json({ message: "Connection user not found" });
     }
-    const existingRequest = await sendConnectionRequest.findOne({
+    const existingRequest = await ConnectionRequest.findOne({
       userId: user._id,
       connectionId: connectionUser._id,
     });
@@ -219,7 +221,7 @@ export const sendConnectionRequest = async (req, res) => {
         .status(400)
         .json({ message: "Connection request already sent" });
     }
-    const request = new sendConnectionRequest({
+    const request = new ConnectionRequest({
       userId: user._id,
       connectionId: connectionUser._id,
     });
@@ -227,24 +229,27 @@ export const sendConnectionRequest = async (req, res) => {
     res.json({ message: "Connection request sent successfully" });
   } catch (error) {
     console.error("Error sending connection request:", error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: error.message });
   }
 };
 
 export const getMyConnectionsRequests = async (req, res) => {
-  const { token } = req.body;
+  const { token } = req.query;
+ 
   try {
     const user = await User.findOne({ token: token });
+
     if (!user) {
       return res.status(400).json({ message: "User not found" });
     }
-    const connection = await connection
-      .find({ userId: user._id })
-      .populate("connectionId", "name email username profilePicture");
-    return res.json(connection);
+    const connections = await ConnectionRequest.find({
+      userId: user._id,
+    }).populate("connectionId", "name email username profilePicture");
+   
+    return res.json({ connections });
   } catch (error) {
     console.error("Error fetching connection requests:", error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: error.message });
   }
 };
 export const whatAreMyConnections = async (req, res) => {
