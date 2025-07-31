@@ -23,7 +23,6 @@ export const loginUser = createAsyncThunk(
 export const registerUser = createAsyncThunk(
   "user/register",
   async (user, thunkAPI) => {
-   
     try {
       const response = await clientServer.post("/register", {
         username: user.username,
@@ -33,7 +32,6 @@ export const registerUser = createAsyncThunk(
       });
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
-     
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
@@ -104,6 +102,7 @@ export const getMyConnectionRequests = createAsyncThunk(
         params: { token: user.token },
       });
       return thunkAPI.fulfillWithValue(response.data.connections);
+      console.log(response.data.connections);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data.message);
     }
@@ -117,7 +116,7 @@ export const AcceptConnection = createAsyncThunk(
         "/user/accept_connection_request",
         {
           token: user.token,
-          connectionId: user.connectionId,
+          requestId: user.connectionId,
           action_type: user.action,
         }
       );

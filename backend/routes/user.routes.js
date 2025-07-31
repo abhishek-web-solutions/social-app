@@ -42,6 +42,8 @@ router.route("/user/send_connection_request").post(sendConnectionRequest);
 router.route("/user/getConnectionRequests").get(getMyConnectionsRequests);
 
 router.route("/user/user_connection_request").get(whatAreMyConnections);
-router.route("/user/accept_connection_request").get(acceptConnectionRequest);
-router.route("/user/get_profile_based_on_username").get(getUserprofileAndUserBaseOnUsername);
+router.route("/user/accept_connection_request").post(acceptConnectionRequest);
+router
+  .route("/user/get_profile_based_on_username")
+  .get(getUserprofileAndUserBaseOnUsername);
 export default router;

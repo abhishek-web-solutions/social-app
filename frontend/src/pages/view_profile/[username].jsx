@@ -5,6 +5,7 @@ import styles from "./index.module.css";
 import { useSearchParams } from "next/navigation";
 import {
   getConnectionsRequest,
+  getMyConnectionRequests,
   sendConnectionRequest,
 } from "@/config/redux/action/authAction";
 
@@ -13,6 +14,7 @@ import { useState } from "react";
 import React, { use, useEffect } from "react";
 import { useRouter } from "next/router";
 import { getAllPosts } from "@/config/redux/action/postAction";
+import { connection } from "next/server";
 
 export default function ViewProfilePage({ userProfile }) {
   const router = useRouter();
@@ -29,6 +31,9 @@ export default function ViewProfilePage({ userProfile }) {
       getConnectionsRequest({
         token: localStorage.getItem("token"),
       })
+    );
+    await dispatch(
+      getMyConnectionRequests({ token: localStorage.getItem("token") })
     );
   };
   useEffect(() => {
@@ -47,13 +52,27 @@ export default function ViewProfilePage({ userProfile }) {
       if (
         authState.connections.find(
           (user) => user.connectionId._id === userProfile.userId._id
-        ).status_accepted ===
-        true
+        ).status_accepted === true
       ) {
         setIsConnectionNull(false);
       }
     }
-  }, [authState.connections]);
+
+    if (
+      authState.connectionRequests.some(
+        (user) => user.userId._id === userProfile.userId._id
+      )
+    ) {
+      setIsCurrentUserInConnection(true);
+      if (
+        authState.connectionRequests.find(
+          (user) => user.userId._id === userProfile.userId._id
+        ).status_accepted === true
+      ) {
+        setIsConnectionNull(false);
+      }
+    }
+  }, [authState.connections, authState.connectionRequests]);
   useEffect(() => {
     getUsersPost();
   }, []);

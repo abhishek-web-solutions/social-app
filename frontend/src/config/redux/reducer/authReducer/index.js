@@ -71,7 +71,6 @@ const authSlice = createSlice({
         state.message = "Registration successfull";
       })
       .addCase(registerUser.rejected, (state, action) => {
-        
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
@@ -98,6 +97,7 @@ const authSlice = createSlice({
       })
       .addCase(getMyConnectionRequests.fulfilled, (state, action) => {
         state.connectionRequests = action.payload;
+       
       })
       .addCase(getMyConnectionRequests.rejected, (state, action) => {
         state.message = action.payload;

@@ -8,6 +8,7 @@
   background: url("https://images.pexels.com/photos/16564260/pexels-photo-16564260.jpeg?_gl=1*1nag2k6*_ga*MjAwMTg3NzMxMC4xNzQ1OTIwMjEw*_ga_8JE65Q40S6*czE3NTMyNTk1NDkkbzUkZzEkdDE3NTMyNTk2NjkkajQwJGwwJGgw");
   background-repeat: no-repeat;
   position: relative;
+  background-size: cover;
   border-radius: 20px;
 }
 .backDropContainer img {
