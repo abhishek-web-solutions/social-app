@@ -52,7 +52,9 @@
   border-left: 1px solid rgb(221, 221, 221);
   padding-left: 1.2rem;
 }
-
+.mobileNavBar {
+  display: none;
+}
 @media only screen and (max-width: 600px) {
   .homeConatainer_extraContainer {
     display: none;

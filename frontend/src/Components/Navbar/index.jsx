@@ -10,13 +10,13 @@ export default function NavBarComponents() {
   return (
     <div classname={styles.container}>
       <nav className={styles.navbar}>
-        <h1
+        <h2
           onClick={() => {
             router.push("/");
           }}
         >
           Pro Connect
-        </h1>
+        </h2>
         <div className={styles.navBarOptionContainer}>
           {authState.profileFetched && (
             <div className={styles.profile}>

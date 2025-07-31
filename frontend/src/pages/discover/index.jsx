@@ -20,7 +20,7 @@ export default function DiscoverPage() {
   return (
     <UserLayout>
       <DashboardLayout>
-        <h2>Discover</h2>
+        <h2 className={styles.discover}>Discover</h2>
         <div className={styles.allUserProfile}>
           {authState.all_profiles_fetched &&
             authState.all_users.map((user) => {

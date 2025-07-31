@@ -18,3 +18,16 @@
   height: 50px;
   border-radius: 50%;
 }
+
+@media only screen and (max-width: 600px) {
+  .discover {
+    text-align: center;
+  }
+  .allUserProfile {
+    width: 100%;
+    max-width: 100%;
+  }
+  .userProfile img {
+    width: 20%;
+  }
+}
