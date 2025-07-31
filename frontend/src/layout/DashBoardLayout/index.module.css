@@ -45,3 +45,39 @@
   width: 20%;
   border-radius: 100%;
 }
+.homeContainer_feedContainer {
+  padding-inline: 0.8rem;
+}
+.homeConatainer_extraContainer {
+  border-left: 1px solid rgb(221, 221, 221);
+  padding-left: 1.2rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .homeConatainer_extraContainer {
+    display: none;
+  }
+  .homeContainer {
+    display: block;
+  }
+  .homeContainer_left {
+    display: none;
+  }
+  .mobileNavBar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 6vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: white;
+  }
+  .mobileNavBar svg {
+    height: 2rem;
+    width: 2rem;
+    cursor: pointer;
+  }
+}
