@@ -26,7 +26,12 @@ export default function Myconnections() {
     <UserLayout>
       <DashboardLayout>
         <div
-          style={{ display: "flex", flexDirection: "column", gap: "1.7rem" }}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "1.7rem",
+            marginBottom: "2rem",
+          }}
         >
           <h4> Requests</h4>
           {authState.connectionRequests.length === 0 && (
@@ -83,7 +88,7 @@ export default function Myconnections() {
                   onClick={() => {
                     router.push(`/view_profile/${user.userId.user}`);
                   }}
-                  className={styles.userCard}
+                  className={styles.userCard2}
                   key={index}
                 >
                   <div style={{ display: "flex", alignItems: "center" }}>

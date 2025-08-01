@@ -155,11 +155,11 @@
     width: 100%;
   }
   .singleCard {
+    margin-bottom: 2rem;
     width: 100%;
   }
   .allCommentsContainer {
     width: 90vw;
     height: 90vh;
   }
-  
 }

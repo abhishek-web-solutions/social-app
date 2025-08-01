@@ -158,7 +158,7 @@ export default function index() {
                     <div className={styles.singleCard_image}>
                       <p>{post.body}</p>
                       <img
-                        src={` https://social-app-j6oo.onrender.com/uploads/${post.media}`}
+                        src={`https://social-app-j6oo.onrender.com/uploads/${post.media}`}
                         alt=""
                       />
                     </div>

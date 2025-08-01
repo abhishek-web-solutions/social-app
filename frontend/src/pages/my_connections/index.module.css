@@ -9,7 +9,6 @@
 .profilePicture > img {
   width: 6.5rem;
   border-radius: 100%;
- 
 }
 .myConnections {
   display: flex;
