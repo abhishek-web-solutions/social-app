@@ -28,6 +28,15 @@ export default function Home() {
           </div>
           <div className={styles.mainContainer_right}>
             <img src="images/socialmedia.jpg" alt="" />
+            <p
+              style={{
+                fontFamily: "cursive",
+                fontSize: "0.5rem",
+                textAlign: "center",
+              }}
+            >
+              @copyright2025 abhishek dwivedi
+            </p>
           </div>
         </div>
       </div>
