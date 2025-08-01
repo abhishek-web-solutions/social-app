@@ -25,10 +25,12 @@ export default function Myconnections() {
   return (
     <UserLayout>
       <DashboardLayout>
-        <div style={{display: "flex", flexDirection: "column",gap:"1.7rem"}}>
-          <h4> My Connections</h4>
+        <div
+          style={{ display: "flex", flexDirection: "column", gap: "1.7rem" }}
+        >
+          <h4> Requests</h4>
           {authState.connectionRequests.length === 0 && (
-            <h1> No connection Request</h1>
+            <h3> No connection Request</h3>
           )}
           {authState.connectionRequests.length !== 0 &&
             authState.connectionRequests
@@ -45,7 +47,7 @@ export default function Myconnections() {
                     <div style={{ display: "flex", alignItems: "center" }}>
                       <div className={styles.profilePicture}>
                         <img
-                          src={`http://localhost:5000/uploads/${user.userId.profilePicture}`}
+                          src={`https://social-app-j6oo.onrender.com/uploads/${user.userId.profilePicture}`}
                           alt=""
                         />
                       </div>
@@ -87,7 +89,7 @@ export default function Myconnections() {
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <div className={styles.profilePicture}>
                       <img
-                        src={`http://localhost:5000/uploads/${user.userId.profilePicture}`}
+                        src={`https://social-app-j6oo.onrender.com/uploads/${user.userId.profilePicture}`}
                         alt=""
                       />
                     </div>

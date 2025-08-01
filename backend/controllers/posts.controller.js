@@ -25,10 +25,11 @@ export const createPost = async (req, res) => {
       media: req.file !== undefined ? req.file.filename : "",
       fileType: req.file !== undefined ? req.file.mimetype.split("/")[1] : "",
     });
+
     await post.save();
+
     return res.status(200).json({ message: "Post created successfully", post });
   } catch (error) {
-  
     res.status(500).json({ message: error.message });
   }
 };
@@ -38,7 +39,7 @@ export const getAllposts = async (req, res) => {
       "userId",
       "name email username profilePicture"
     );
-   
+
     res.json(posts);
   } catch (error) {
     console.error("Error fetching all posts:", error);
@@ -88,10 +89,9 @@ export const increment_likes = async (req, res) => {
 export const commentPost = async (req, res) => {
   const { token, post_id, commentBody } = req.body;
 
-
   try {
     const user = await User.findOne({ token: token }).select("_id");
-   
+
     if (!user) {
       return res.status(400).json({ message: "User not found" });
     }
@@ -125,7 +125,7 @@ export const get_Comments_by_post = async (req, res) => {
       "userId",
       "username name"
     );
-   
+
     return res.json(comments.reverse());
   } catch (error) {
     console.error("Error fetching comments by post:", error);
