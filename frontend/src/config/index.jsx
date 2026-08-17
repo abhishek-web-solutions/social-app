@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const clientserver = axios.create({
-  baseURL: "https://social-app-2-86op.onrender.com",
+  baseURL: "https://social-connect-p5jm.onrender.com",
 });
 export { clientserver as clientServer };
 
